@@ -6,7 +6,7 @@ var mov = new Movie(path);
 
 
 mov.on('found', function(provider, id){
-	console.log('Movie '+path+ "identified as "+id+" by "+provider);
+	console.log('Movie '+path+ " identified as "+id+" by "+provider);
 });
 
 mov.process();

@@ -15,18 +15,25 @@ Provider.prototype.setLang = function(lang) {
 	this.lang = lang;
 };
 
-Provider.prototype.getName = function(self, id) {
-	console.log(self.name+".getName(id) => not implemented");
+Provider.prototype.registerCallback = function(cb) {
+	var self = this;
+	return function() { // anonymous function to keep track of the current provider
+		this.name = self.name;
+		self[cb].apply(self, arguments);
+	}
 };
 
-Provider.prototype.identifyFromString = function(self,buf) {
-	console.log(self.name+".identifyFromString(bug) => not implemented");
+Provider.prototype.getName = function(id) {
+	console.log(this.name+".getName(id) => not implemented");
+};
+
+Provider.prototype.identifyFromString = function(buf) {
+	console.log(this.name+".identifyFromString(bug) => not implemented");
 	console.log("   you should emit a 'found' event with id as 1st param if string description is identified");
 };
 
-Provider.prototype.identifyFromFile = function(self, file) {
-	console.log(self);
-	console.log(self.name+".identifyFromFile(file) => not implemented");
+Provider.prototype.identifyFromFile = function(file) {
+	console.log(this.name+".identifyFromFile(file) => not implemented");
 	console.log("   you should emit a 'found' event with id as 1st param if file is identified");
 };
 

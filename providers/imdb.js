@@ -18,16 +18,14 @@ var Imdb = module.exports = function Imdb() {
 Imdb.prototype.identifyFromString = function(buf) {
 	t = buf.match(/imdb\.[^\/]+\/title\/tt(\d+)/i);
 	if(t) {
-		this.emit('found', this, t[1]);
+		this.emit('found', t[1]);
 	}
 };
 
-/*
 Imdb.prototype.identifyFromFile = function(file) {
-	console.log("IMDB : trying to identify from file data: "+file);
-	this.emit('found', 'imdb', 'TODO-HASH-FILE');
+	console.log(this.name +" : trying to identify from file data: "+file);
+	this.emit('found', 'TODO-HASH-FILE');
 };
-*/
 
 Imdb.prototype.__proto__ = abstract.prototype;
 
