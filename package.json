@@ -1,0 +1,22 @@
+{
+  "name": "moviesorganizer",
+  "version": "0.0.1",
+  "description": "This tool allow you to rename you movie collection automatically based on nfo or hashing identification methods",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/ka2er/moviesorganizer.git"
+  },
+  "keywords": [
+    "movies",
+    "imdb",
+    "allocine",
+    "nfo",
+    "renamer"
+  ],
+  "author": "ka2er",
+  "license": "GPL"
+}
