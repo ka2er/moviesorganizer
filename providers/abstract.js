@@ -8,27 +8,26 @@
 var EventEmitter = require('events').EventEmitter;
 
 var Provider = module.exports = function Provider() {
+	this.name = "please define me";
 };
 
 Provider.prototype.setLang = function(lang) {
 	this.lang = lang;
 };
 
-Provider.prototype.getName = function(id) {
-	console.log("returning name for id : "+id);
+Provider.prototype.getName = function(self, id) {
+	console.log(self.name+".getName(id) => not implemented");
 };
 
-Provider.prototype.identifyFromString = function(buf) {
-	console.log("trying to identify from description string : "+buf);
+Provider.prototype.identifyFromString = function(self,buf) {
+	console.log(self.name+".identifyFromString(bug) => not implemented");
+	console.log("   you should emit a 'found' event with id as 1st param if string description is identified");
 };
 
-
-Provider.prototype.identifyFromFile = function(buf) {
-	console.log("implement me trying to identify from file data : "+buf);
-	//this.emit('found', 'TODO-HASH-FILE');
+Provider.prototype.identifyFromFile = function(self, file) {
+	console.log(self);
+	console.log(self.name+".identifyFromFile(file) => not implemented");
+	console.log("   you should emit a 'found' event with id as 1st param if file is identified");
 };
 
 Provider.prototype.__proto__ = EventEmitter.prototype;
-
-
-

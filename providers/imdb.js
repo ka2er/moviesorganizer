@@ -3,6 +3,8 @@ var	imdb = require('imdb-api'),
 
 var Imdb = module.exports = function Imdb() {
 
+	this.name = "imdb";
+
 	this.getName = function(id) {
 		imdb.getById(id, function(err,data){
 	        console.log(data.title);
@@ -16,14 +18,16 @@ var Imdb = module.exports = function Imdb() {
 Imdb.prototype.identifyFromString = function(buf) {
 	t = buf.match(/imdb\.[^\/]+\/title\/tt(\d+)/i);
 	if(t) {
-		this.emit('found', t[1]);
+		this.emit('found', this, t[1]);
 	}
 };
 
+/*
 Imdb.prototype.identifyFromFile = function(file) {
 	console.log("IMDB : trying to identify from file data: "+file);
-	this.emit('found', 'TODO-HASH-FILE');
+	this.emit('found', 'imdb', 'TODO-HASH-FILE');
 };
+*/
 
 Imdb.prototype.__proto__ = abstract.prototype;
 
