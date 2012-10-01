@@ -1,12 +1,7 @@
-var EventEmitter = require('events').EventEmitter,
-	imdb = require('node-imdb-api');
+var	imdb = require('imdb-api'),
+	abstract = require('./abstract.js');
 
 var Imdb = module.exports = function Imdb() {
-
-	// useless ??
-	this.setLang = function(lang) {
-		this.lang = lang;
-	};
 
 	this.getName = function(id) {
 		imdb.getById(id, function(err,data){
@@ -16,12 +11,6 @@ var Imdb = module.exports = function Imdb() {
 		});
 		return false;
 	};
-
-	this.identifyFromFile = function(file) {
-		console.log("trying to identify from file data"+file);
-		this.emit('found', 'TODO-HASH-FILE');
-		// TODO hash file
-	};
 };
 
 Imdb.prototype.identifyFromString = function(buf) {
@@ -29,6 +18,12 @@ Imdb.prototype.identifyFromString = function(buf) {
 	if(t) {
 		this.emit('found', t[1]);
 	}
-}
+};
 
-Imdb.prototype.__proto__ = EventEmitter.prototype;
+Imdb.prototype.identifyFromFile = function(file) {
+	console.log("IMDB : trying to identify from file data: "+file);
+	this.emit('found', 'TODO-HASH-FILE');
+};
+
+Imdb.prototype.__proto__ = abstract.prototype;
+

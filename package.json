@@ -10,6 +10,11 @@
     "type": "git",
     "url": "http://github.com/ka2er/moviesorganizer.git"
   },
+  "dependencies": {
+	"findit": ">=0.1.2",
+	"imdb-api": "*"
+
+  },
   "keywords": [
     "movies",
     "imdb",
