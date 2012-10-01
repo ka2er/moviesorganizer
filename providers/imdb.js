@@ -1,4 +1,5 @@
 var	imdb = require('imdb-api'),
+	fs = require('fs'),
 	abstract = require('./abstract.js');
 
 var Imdb = module.exports = function Imdb() {
@@ -27,6 +28,14 @@ Imdb.prototype.identifyFromString = function(buf) {
 };
 
 Imdb.prototype.identifyFromFile = function(file) {
+console.log('to');
+	fs.stat(file, function(err, stats) {
+		console.log(err);
+		if(!err)
+			console.log(stats.size);
+	});
+
+
 	console.log(this.name +" : trying to identify from file data: "+file);
 	this.emit('found', 'TODO-HASH-FILE');
 };

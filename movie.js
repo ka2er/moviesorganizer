@@ -22,14 +22,14 @@ Movie.prototype.hasNfo = function() {
 
 	fs.stat(nfo, function (err, stats) {
 		if(err) {
-			self.emit('nfo-not-found', self.path);
+			self.emit('nfo-not-found', self.path); // plan b
 			return;
 		}
 
 		fs.readFile(nfo, function(err, buf) {
 			if(!err) {
 				self.nfo = nfo;
-				self.emit('nfo-found', buf);
+				self.emit('nfo-found', buf.toString());
 			}
 		});
 	});
@@ -37,7 +37,7 @@ Movie.prototype.hasNfo = function() {
 
 Movie.prototype.updateNfo = function(string) {
 	if(this.nfo) {
-		fs.appendFileSync(filename, data);
+		fs.appendFileSync(filename, data);w
 	}
 	console.log("TODO: implement updateNFO with string"+string);
 
@@ -71,3 +71,9 @@ Movie.prototype.process = function(){
 	// 1er test : il y a t il un nfo ?
 	this.hasNfo();
 };
+
+/*
+nfo => present => parsenfo => imdb
+							=> idenitf yfrom file
+	=> identify from file
+ */
