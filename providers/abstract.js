@@ -22,6 +22,9 @@ Provider.prototype.registerCallback = function(cb) {
 		self[cb].apply(self, arguments);
 	}
 };
+Provider.prototype.getLink = function(id) {
+	console.log(this.name+".getLink(id) => not implemented");
+};
 
 Provider.prototype.getName = function(id) {
 	console.log(this.name+".getName(id) => not implemented");

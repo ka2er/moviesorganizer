@@ -13,6 +13,10 @@ var Imdb = module.exports = function Imdb() {
 		});
 		return false;
 	};
+
+	this.getLink = function(id) {
+		return "http://www.imdb.com/title/tt/"+id;
+	};
 };
 
 Imdb.prototype.identifyFromString = function(buf) {

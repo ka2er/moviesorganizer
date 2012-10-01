@@ -35,6 +35,15 @@ Movie.prototype.hasNfo = function() {
 	});
 };
 
+Movie.prototype.updateNfo = function(string) {
+	if(this.nfo) {
+		fs.appendFileSync(filename, data);
+	}
+	console.log("TODO: implement updateNFO with string"+string);
+
+	// 1 - write or update nfo
+};
+
 Movie.prototype.process = function(){
 
 	self = this;
@@ -49,7 +58,13 @@ Movie.prototype.process = function(){
 
 		aProvider.on('found', function(id) { // chain events
 			console.log(this.name+" found something id="+id);
+			// update NFO...
+
+			self.updateNfo(this.getLink(id));
+
+
 			self.emit('found', this.name, id);
+			// TODO : cancel all remaining callback... ???
 		});
 	}
 
