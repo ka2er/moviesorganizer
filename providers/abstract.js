@@ -9,6 +9,7 @@ var EventEmitter = require('events').EventEmitter;
 
 var Provider = module.exports = function Provider() {
 	this.name = "please define me";
+	this.lang = "FR"; // default to french
 };
 
 Provider.prototype.setLang = function(lang) {
