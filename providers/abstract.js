@@ -31,14 +31,18 @@ Provider.prototype.getName = function(id) {
 	console.log(this.name+".getName(id) => not implemented");
 };
 
+Provider.prototype.getYear = function(id) {
+	console.log(this.name+".getYear(id) => not implemented");
+};
+
 Provider.prototype.identifyFromString = function(buf) {
 	console.log(this.name+".identifyFromString(bug) => not implemented");
-	console.log("   you should emit a 'found' event with id as 1st param if string description is identified");
+	console.log("   you should emit a 'found' event with provider as 1st param and id as 2nd param if string description is identified");
 };
 
 Provider.prototype.identifyFromFile = function(file) {
 	console.log(this.name+".identifyFromFile(file) => not implemented");
-	console.log("   you should emit a 'found' event with id as 1st param if file is identified");
+	console.log("   you should emit a 'found' event with provider as 1st param and id as 2nd param if file is identified");
 };
 
 Provider.prototype.__proto__ = EventEmitter.prototype;

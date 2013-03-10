@@ -37,7 +37,7 @@ Movie.prototype.hasNfo = function() {
 
 Movie.prototype.updateNfo = function(string) {
 	if(this.nfo) {
-		fs.appendFileSync(filename, data);w
+		fs.appendFileSync(filename, data);
 	}
 	console.log("TODO: implement updateNFO with string"+string);
 
@@ -63,7 +63,7 @@ Movie.prototype.process = function(){
 			self.updateNfo(this.getLink(id));
 
 
-			self.emit('found', this.name, id);
+			self.emit('identified', this, id);
 			// TODO : cancel all remaining callback... ???
 		});
 	}

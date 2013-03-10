@@ -65,8 +65,29 @@ findImdbId = function(file, callback) {
 
 };
 
+cleanupName = function(file) {
+	var t_search = [
+		'720p',
+		'bluray',
+		'x264',
+		'french',
+		'frehd',
+		'[^a-z0-9]',
+		'[0-9]{4}'
+	];
+
+	for(i in t_search) {
+		var regex = new RegExp(t_search[i], "gi");
+		file = file.replace(regex, ' ');
+	}
+
+	// trim spaces
+	return file.replace(/^\s+|\s+$/, '');
+};
+
 // exports
 exports.getExtension = getExtension;
 exports.getMovies = getMovies;
 exports.getNfo = getNfo;
 exports.findImdbId = findImdbId;
+exports.cleanupName = cleanupName;
