@@ -7,7 +7,9 @@
  */
 
 var findit = require("findit"),
-	fs = require("fs");
+	fs = require("fs"),
+	path = require("path"),
+    glob = require("glob");
 
 // video files common extension
 // http://trac.opensubtitles.org/projects/opensubtitles/wiki/
@@ -16,15 +18,35 @@ var t_movie_ext = [
 		'mkv', 'mov', 'movhd', 'ogm',
 		'vob', 'wmv', 'x264','xvid'
 ];
-getMovies = function(path, callback) {
-	findit.find(path, function(file) {
+
+// extra video files (subtitles, info, etc...)
+var t_movie_dep_ext = [
+        'idx', 'sub', 'srt', 'nfo'
+];
+
+/**
+ * find all movies recursively into a path
+ *
+ * @param aPath
+ * @param callback cb(file)
+ */
+getMovies = function(aPath, callback) {
+	findit.find(aPath, function(file) {
 		fs.stat(file, function(err, stat) {
 			if(! err && stat.isFile()) {
 				if(file.indexOf('.') != -1) { // file has extension
+                    file = path.normalize(file);
 					ext = getExtension(file);
 					if(t_movie_ext.indexOf(ext.toLowerCase()) != -1) {
-						console.log("Movie found : "+file);
-						callback(file);
+						//console.log("Movie found : "+file);
+
+                        // movie has part ... @TODO handle it
+                        if(file.toLowerCase().indexOf('cd1') == -1 &&
+                           file.toLowerCase().indexOf('cd2') == -1
+                            ) {
+
+                            callback(file);
+                        }
 					}
 				}
 			}
@@ -32,11 +54,50 @@ getMovies = function(path, callback) {
 	});
 };
 
-
-getExtension = function(file) {
-	return file.split('.').pop();
+/**
+ * check if a dir contains movies
+ * @param dir
+ * @param cb
+ */
+remainMovies = function(dir, cb) {
+    glob(dir+path.sep+"*.{"+t_movie_ext.join(',')+"}", function(err, files) {
+        if(!err) {
+            return cb(files.length > 0);
+        }
+        cb(true); // in case of doubt...
+    });
 };
 
+
+/**
+ * search for dependant files relative to a movie file
+ *
+ * @param aMovie
+ * @param cb
+ */
+getDependantMovieFiles = function(aMovie, cb) {
+    var file_base = path.normalize(path.dirname(aMovie)+path.sep+path.basename(aMovie, path.extname(aMovie)));
+    glob(file_base+".{"+t_movie_dep_ext.join(',')+"}", function(err, files) {
+        if(!err) {
+            cb(files);
+        }
+    });
+};
+
+/**
+ * return file extension without the .
+ * @param file
+ * @returns {string}
+ */
+getExtension = function(file) {
+	return path.extname(file).substr(1);
+};
+
+/**
+ * return NFO object if found
+ * @param file
+ * @param callback(err, file)
+ */
 getNfo = function(file, callback) {
 	var ext = getExtension(file);
 	var nfo = file.substr(0, file.length-ext.length)+'nfo';
@@ -48,21 +109,6 @@ getNfo = function(file, callback) {
 		}
 		callback(null, nfo);
 	});
-};
-
-findImdbId = function(file, callback) {
-
-	fs.readFile(file, function(err, buf) {
-		if(err) {
-			callback(err);
-			return;
-		}
-
-		t = buf.toString().match(/imdb\.[^\/]+\/title\/tt(\d+)/i);
-		if(t) callback(null, t[1]);
-		else callback("IMDB url not found in "+file);
-	});
-
 };
 
 cleanupName = function(file) {
@@ -88,6 +134,7 @@ cleanupName = function(file) {
 // exports
 exports.getExtension = getExtension;
 exports.getMovies = getMovies;
+exports.remainMovies = remainMovies;
 exports.getNfo = getNfo;
-exports.findImdbId = findImdbId;
 exports.cleanupName = cleanupName;
+exports.getDependantMovieFiles = getDependantMovieFiles;

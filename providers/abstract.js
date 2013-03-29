@@ -1,15 +1,10 @@
-/**
- * User: seb
- * Date: 01/10/12
- * Time: 17:12
- * To change this template use File | Settings | File Templates.
- */
-
-var EventEmitter = require('events').EventEmitter;
-
 var Provider = module.exports = function Provider() {
 	this.name = "please define me";
 	this.lang = "FR"; // default to french
+};
+
+Provider.prototype.get = function() {
+	return this;
 };
 
 Provider.prototype.setLang = function(lang) {
@@ -37,12 +32,10 @@ Provider.prototype.getYear = function(id) {
 
 Provider.prototype.identifyFromString = function(buf) {
 	console.log(this.name+".identifyFromString(bug) => not implemented");
-	console.log("   you should emit a 'found' event with provider as 1st param and id as 2nd param if string description is identified");
+	console.log("   you should return 'id' if string description is identified or false");
 };
 
 Provider.prototype.identifyFromFile = function(file) {
 	console.log(this.name+".identifyFromFile(file) => not implemented");
 	console.log("   you should emit a 'found' event with provider as 1st param and id as 2nd param if file is identified");
 };
-
-Provider.prototype.__proto__ = EventEmitter.prototype;
