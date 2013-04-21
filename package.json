@@ -16,7 +16,7 @@
     "allocine" : "*",
 	"moviedb" : "0.0.3",
     "glob" : ">=3.1.21",
-    "optimimst" : ">=0.3.5"
+    "optimist" : ">=0.3.5"
   },
   "keywords": [
     "movies",
