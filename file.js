@@ -111,6 +111,22 @@ getNfo = function(file, callback) {
 	});
 };
 
+/**
+ * create or Update movie NFO file
+ * @param movie_file
+ * @param string to append
+ */
+createOrUpdateNfo = function(movie_file, string) {
+	var ext = getExtension(movie_file);
+	var nfo = movie_file.substr(0, movie_file.length-ext.length)+'nfo';
+	
+	var ret = fs.appendFileSync(nfo, string);
+	if(ret) console.log('	err while creatingOrUpdatingNfo for '+movie_file, ret);
+};
+
+/**
+ * cleanup file name from irrevelant informations
+ */
 cleanupName = function(file) {
 	var t_search = [
 		'720p',
@@ -136,5 +152,6 @@ exports.getExtension = getExtension;
 exports.getMovies = getMovies;
 exports.remainMovies = remainMovies;
 exports.getNfo = getNfo;
+exports.createOrUpdateNfo = createOrUpdateNfo;
 exports.cleanupName = cleanupName;
 exports.getDependantMovieFiles = getDependantMovieFiles;

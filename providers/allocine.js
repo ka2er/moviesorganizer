@@ -79,6 +79,13 @@ Allocine.prototype.identifyFromString = function(buf) {
 	return false;
 };
 
+/**
+ * return URL to movie details
+ */
+Allocine.prototype.getLink = function(id) {
+	return "http://www.allocine.fr/film/fichefilm_gen_cfilm="+id+".html";
+};
+
 
 Allocine.prototype.identifyFromFile = function(file) {
 	console.log(" +"+this.name+" : @TODO trying to identify from file data: "+file);

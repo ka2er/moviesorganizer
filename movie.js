@@ -81,18 +81,6 @@ Movie.prototype.getNFOsContent = function(alt_nfo_path, cb) {
 };
 
 /**
- * @param string
- */
-Movie.prototype.updateNfo = function(string) {
-	//if(this.nfo) {
-	//	fs.appendFileSync(filename, data);
-	//}
-	console.log("TODO: implement updateNFO with string"+string);
-
-	// 1 - write or update nfo
-};
-
-/**
  * process movie identification
  *
  * @param t_providers

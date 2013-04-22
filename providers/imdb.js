@@ -82,6 +82,13 @@ Imdb.prototype.identifyFromString = function(buf) {
 };
 
 /**
+ * return URL to movie details
+ */
+Imdb.prototype.getLink = function(id) {
+	return "http://www.imdb.com/title/tt"+id+"/";
+};
+
+/**
  * try to find movie based on movie file name
  */
 Imdb.prototype.identifyFromFile = function(aFile) {
