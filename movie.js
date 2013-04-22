@@ -109,10 +109,15 @@ Movie.prototype.process = function(t_providers, alt_nfo_dir){
 //		this.on('nfo-found', aProvider.registerCallback('identifyFromString'));
 //		this.on('nfo-not-found', aProvider.registerCallback('identifyFromFile'));
 
-			try {
+			var score = -1;
+	 		try {
+				
 				// 1 - NFO content : string passed is NFOs content + file name...
 				id = aProvider.identifyFromString(nfo_buf+" file: "+self.path);
-				if(id) throw 'found';
+				if(id) {
+					score = 100; // identification against id is very strong
+					throw 'found';
+				}
 
 				// 2 - file hash
 
@@ -130,7 +135,7 @@ Movie.prototype.process = function(t_providers, alt_nfo_dir){
 			} catch(exc) {
 				if(exc == 'found') {
 					//console.log(self.path +" identified as "+id+" by "+aProvider.name);
-					self.emit('found', aProvider, id);
+					self.emit('found', aProvider, id, score);
 				} else {
                     self.emit('not-found', aProvider);
                     //console.log("No identification for "+self.path+' by '+aProvider.name);

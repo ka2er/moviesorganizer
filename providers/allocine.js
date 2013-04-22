@@ -2,12 +2,10 @@ var abstract = require('./abstract.js'),
     allocine = require('allocine');
 
 
-var Allocine = function Allocine() {
-};
+var Allocine = function Allocine() {};
 
 Allocine.prototype.name = 'allocine';
 Allocine.prototype.h_cache = {};
-
 
 Allocine.prototype.api = function() {
     if(! this._api)
@@ -83,7 +81,7 @@ Allocine.prototype.identifyFromString = function(buf) {
 
 
 Allocine.prototype.identifyFromFile = function(file) {
-	console.log(" +"+this.name+" : trying to identify from file data: "+file);
+	console.log(" +"+this.name+" : @TODO trying to identify from file data: "+file);
 	//this.emit('found', 'TODO-HASH-FILE');
 };
 

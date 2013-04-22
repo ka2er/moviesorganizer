@@ -21,8 +21,8 @@ var async = require("async"),
  * + add command line arguments layer
  * + dry run mode...
  *
- * - update NFO with ID found
- * - cd1 / cd2 ...
+ * - update NFO with ID found (or create it)
+ * - cd1 / cd2 ... (just skip for the moment)
  * - file hasing identification
  * - name search identification
  * - implements all providers (tmdb)
